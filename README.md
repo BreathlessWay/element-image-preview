@@ -96,3 +96,8 @@
 | onSwitch     | 切换图片时的回调，接受当前激活的图片索引参数   | Function(index) | —      | -    |
 | onClose      | 关闭预览时的回调                               | Function()      | —      | -    |
 | onFetchImage | 异步获取图片的回调，接受当前激活的图片地址参数 | Function(url)   | —      | -    |
+
+
+### Tips
+
+1. vue 的过度动画 transition，可以通过 appear attribute 设置节点在初始渲染的过渡

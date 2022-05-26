@@ -1,0 +1,14 @@
+# 忽略目录
+public/
+
+# 忽略指定文件
+vue.config.js
+babel.config.js
+*.map
+.editorconfig.js
+lint-staged.config.js
+jsconfig.json
+.eslintrc.js
+.browserslistrc
+.versionrc
+commitlint.config.js
