@@ -60,7 +60,7 @@
         />
         <div class="el-loading-spinner" v-show="loading">
           <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none"/>
+            <circle class="path" cx="50" cy="50" r="20" fill="none" />
           </svg>
         </div>
       </div>
@@ -87,7 +87,7 @@ const mousewheelEventName = isFirefox() ? "DOMMouseScroll" : "mousewheel";
 
 let cacheFilePath = {};
 
-let prevOverflow = '';
+let prevOverflow = "";
 
 export default {
   name: "ImageViewer",
@@ -108,13 +108,12 @@ export default {
       type: Function,
       default: () => {},
     },
+    onFetchImage: {
+      type: Function,
+    },
     initialIndex: {
       type: Number,
       default: 0,
-    },
-    appendToBody: {
-      type: Boolean,
-      default: true,
     },
     maskClosable: {
       type: Boolean,
@@ -186,11 +185,9 @@ export default {
   },
   mounted() {
     this.deviceSupportInstall();
-    if (this.appendToBody) {
-      document.body.appendChild(this.$el);
-    }
+    document.body.appendChild(this.$el);
     prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs["el-image-viewer__wrapper"].focus();
@@ -200,26 +197,30 @@ export default {
     document.body.style.overflow = prevOverflow;
     cacheFilePath = {};
     // if appendToBody is true, remove DOM node after destroy
-    if (this.appendToBody && this.$el && this.$el.parentNode) {
+    if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }
   },
   methods: {
     async getImagePath() {
-      const cachePath = cacheFilePath[this.currentImg];
-      if (cachePath) {
-        this.showImageUrl = cachePath;
-        return;
-      }
-      try {
-        this.loading = true;
-
-        // cacheFilePath[this.currentImg] = res?.data;
-        this.showImageUrl = this.currentImg
-      } catch (e) {
-        console.log(e);
-      } finally {
-        this.loading = false;
+      if (this.onFetchImage) {
+        const cachePath = cacheFilePath[this.currentImg];
+        if (cachePath) {
+          this.showImageUrl = cachePath;
+          return;
+        }
+        try {
+          this.loading = true;
+          const imageUrl = await this.onFetchImage(this.currentImg);
+          cacheFilePath[this.currentImg] = imageUrl || "";
+          this.showImageUrl = imageUrl || "";
+        } catch (e) {
+          console.log(e);
+        } finally {
+          this.loading = false;
+        }
+      } else {
+        this.showImageUrl = this.currentImg;
       }
     },
     hide() {
