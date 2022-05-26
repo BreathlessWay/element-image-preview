@@ -1,7 +1,7 @@
 {
   "name": "@breathlessway/element-image-preview",
   "description": "element-image-preview component",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
