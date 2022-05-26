@@ -1,7 +1,7 @@
 {
   "name": "@breathlessway/element-image-preview",
   "description": "element-image-preview component",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,7 +10,7 @@
     "lib": "vue-cli-service build --target lib --name element-image-preview src/components/index.js",
     "release": "standard-version",
     "prepublishOnly": "npm run lib",
-    "deploy": "npm run release && git push --follow-tags origin master && npm publish --access public"
+    "deploy": "npm run release && git push --follow-tags origin main && npm publish --access public"
   },
   "main": "dist/element-image-preview.umd.min.js",
   "author": "BreathlessWay",

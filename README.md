@@ -101,3 +101,7 @@
 ### Tips
 
 1. vue 的过度动画 transition，可以通过 appear attribute 设置节点在初始渲染的过渡
+2. `npm run deploy` 时报 `.git/hooks/pre-commit: line 48: node: command not found`
+错误，解决方法
+    - whereis node
+    - ln -s node路径 /usr/local/bin/node
