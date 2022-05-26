@@ -1,0 +1,36 @@
+@import "function";
+
+/* BEM
+ -------------------------- */
+@mixin b($block) {
+  $B: $namespace+'-'+$block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}
