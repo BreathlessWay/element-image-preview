@@ -1,5 +1,5 @@
 <template>
-  <article>1</article>
+  <article>Image Viewer</article>
 </template>
 
 <script>

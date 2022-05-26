@@ -1,8 +1,8 @@
 <template>
   <transition name="viewer-fade">
     <div
-      tabindex="-1"
       ref="el-image-viewer__wrapper"
+      tabindex="-1"
       class="el-image-viewer__wrapper"
       :style="{ 'z-index': zIndex }"
     >
@@ -49,12 +49,10 @@
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
         <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
+          v-if="showImageUrl"
           ref="img"
           class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
+          :src="showImageUrl"
           :style="imgStyle"
           @load="handleImgLoad"
           @error="handleImgError"
@@ -66,8 +64,8 @@
 </template>
 
 <script>
-import { on, off } from "./utils";
-import { rafThrottle, isFirefox } from "./utils";
+import { on, off } from "@/utils";
+import { rafThrottle, isFirefox } from "@/utils";
 
 const Mode = {
   CONTAIN: {
@@ -81,6 +79,8 @@ const Mode = {
 };
 
 const mousewheelEventName = isFirefox() ? "DOMMouseScroll" : "mousewheel";
+
+let cacheFilePath = {};
 
 export default {
   name: "ImageViewer",
@@ -128,6 +128,7 @@ export default {
         offsetY: 0,
         enableTransition: false,
       },
+      showImageUrl: "",
     };
   },
   computed: {
@@ -165,15 +166,52 @@ export default {
       },
     },
     currentImg(val) {
+      this.getImagePath();
+    },
+    showImageUrl() {
       this.$nextTick((_) => {
-        const $img = this.$refs.img[0];
+        const $img = this.$refs.img;
         if (!$img.complete) {
           this.loading = true;
         }
       });
     },
   },
+  mounted() {
+    this.deviceSupportInstall();
+    if (this.appendToBody) {
+      document.body.appendChild(this.$el);
+    }
+    // add tabindex then wrapper can be focusable via Javascript
+    // focus wrapper so arrow key can't cause inner scroll behavior underneath
+    this.$refs["el-image-viewer__wrapper"].focus();
+    this.getImagePath();
+  },
+  destroyed() {
+    cacheFilePath = {};
+    // if appendToBody is true, remove DOM node after destroy
+    if (this.appendToBody && this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
+  },
   methods: {
+    async getImagePath() {
+      const cachePath = cacheFilePath[this.currentImg];
+      if (cachePath) {
+        this.showImageUrl = cachePath;
+        return;
+      }
+      try {
+        this.loading = true;
+
+        // cacheFilePath[this.currentImg] = res?.data;
+        this.showImageUrl = this.currentImg
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.loading = false;
+      }
+    },
     hide() {
       this.deviceSupportUninstall();
       this.onClose();
@@ -316,21 +354,6 @@ export default {
       }
       transform.enableTransition = enableTransition;
     },
-  },
-  mounted() {
-    this.deviceSupportInstall();
-    if (this.appendToBody) {
-      document.body.appendChild(this.$el);
-    }
-    // add tabindex then wrapper can be focusable via Javascript
-    // focus wrapper so arrow key can't cause inner scroll behavior underneath
-    this.$refs["el-image-viewer__wrapper"].focus();
-  },
-  destroyed() {
-    // if appendToBody is true, remove DOM node after destroy
-    if (this.appendToBody && this.$el && this.$el.parentNode) {
-      this.$el.parentNode.removeChild(this.$el);
-    }
   },
 };
 </script>

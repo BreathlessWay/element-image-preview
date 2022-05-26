@@ -1,4 +1,4 @@
-@import "mixins/mixins";
+@import "../../assets/style/mixins/mixins";
 
 @include b(image-viewer) {
   @include e(wrapper) {

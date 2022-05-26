@@ -2,7 +2,7 @@ import Vue from "vue";
 
 import App from "./App";
 
-import ImageViewer from "./index.js";
+import ImageViewer from "./components/";
 
 Vue.use(ImageViewer);
 
