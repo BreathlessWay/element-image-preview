@@ -9,7 +9,7 @@
       <div class="el-image-viewer__mask" @click.self="handleMaskClick"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
-        <i class="el-icon-close"></i>
+        <i class="iv-icon-close"></i>
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
@@ -18,30 +18,30 @@
           :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev"
         >
-          <i class="el-icon-arrow-left" />
+          <i class="iv-icon-arrow-left" />
         </span>
         <span
           class="el-image-viewer__btn el-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
           @click="next"
         >
-          <i class="el-icon-arrow-right" />
+          <i class="iv-icon-arrow-right" />
         </span>
       </template>
       <!-- ACTIONS -->
       <div class="el-image-viewer__btn el-image-viewer__actions">
         <div class="el-image-viewer__actions__inner">
-          <i class="el-icon-zoom-out" @click="handleActions('zoomOut')"></i>
-          <i class="el-icon-zoom-in" @click="handleActions('zoomIn')"></i>
+          <i class="iv-icon-zoom-out" @click="handleActions('zoomOut')"></i>
+          <i class="iv-icon-zoom-in" @click="handleActions('zoomIn')"></i>
           <i class="el-image-viewer__actions__divider"></i>
           <i :class="mode.icon" @click="toggleMode"></i>
           <i class="el-image-viewer__actions__divider"></i>
           <i
-            class="el-icon-refresh-left"
+            class="iv-icon-refresh-left"
             @click="handleActions('anticlocelise')"
           ></i>
           <i
-            class="el-icon-refresh-right"
+            class="iv-icon-refresh-right"
             @click="handleActions('clocelise')"
           ></i>
         </div>
@@ -70,11 +70,11 @@ import { rafThrottle, isFirefox } from "@/utils";
 const Mode = {
   CONTAIN: {
     name: "contain",
-    icon: "el-icon-full-screen",
+    icon: "iv-icon-full-screen",
   },
   ORIGINAL: {
     name: "original",
-    icon: "el-icon-c-scale-to-original",
+    icon: "iv-icon-c-scale-to-original",
   },
 };
 

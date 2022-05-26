@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "iv-icon"; /* Project id 3431514 */
+  src: url("../fonts/iv-icon.woff") format("woff"),
+    /* chrome, firefox */ url("../fonts/iv-icon.ttf") format("truetype"); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  font-weight: normal;
+  font-display: auto;
+  font-style: normal;
+}
+
+[class^="iv-icon-"],
+[class*=" iv-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "iv-icon" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iv-icon-close:before {
+  content: "\e69a";
+}
+
+.iv-icon-arrow-left:before {
+  content: "\e693";
+}
+
+.iv-icon-arrow-right:before {
+  content: "\e694";
+}
+
+.iv-icon-full-screen:before {
+  content: "\e63f";
+}
+
+.iv-icon-c-scale-to-original:before {
+  content: "\e638";
+}
+
+.iv-icon-refresh-left:before {
+  content: "\e673";
+}
+
+.iv-icon-refresh-right:before {
+  content: "\e677";
+}
+
+.iv-icon-zoom-in:before {
+  content: "\e682";
+}
+
+.iv-icon-zoom-out:before {
+  content: "\e684";
+}

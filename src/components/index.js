@@ -2,6 +2,8 @@ import ImageViewer from "@/components/ImageViewer/main";
 
 import { ImageViewerInstance } from "@/components/ImageViewer";
 
+import '@/assets/style/icon.scss'
+
 const components = [ImageViewer];
 
 const install = function (Vue) {
