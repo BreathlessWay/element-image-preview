@@ -1,5 +1,5 @@
 <template>
-  <transition name="viewer-fade">
+  <transition name="viewer-fade" appear>
     <div
       ref="el-image-viewer__wrapper"
       tabindex="-1"
@@ -81,6 +81,8 @@ const Mode = {
 const mousewheelEventName = isFirefox() ? "DOMMouseScroll" : "mousewheel";
 
 let cacheFilePath = {};
+
+let prevOverflow = '';
 
 export default {
   name: "ImageViewer",
@@ -182,12 +184,15 @@ export default {
     if (this.appendToBody) {
       document.body.appendChild(this.$el);
     }
+    prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs["el-image-viewer__wrapper"].focus();
     this.getImagePath();
   },
   destroyed() {
+    document.body.style.overflow = prevOverflow;
     cacheFilePath = {};
     // if appendToBody is true, remove DOM node after destroy
     if (this.appendToBody && this.$el && this.$el.parentNode) {
