@@ -2,7 +2,22 @@
 
 ## ImageViewer 图片预览
 
-图片预览组件，从 [element-ui](https://element.eleme.cn/#/zh-CN/component/image) 的图片组件中剥离出来的单独的图片预览功能，参数和 element-ui 一致，主要为解决当预览图片需要通过接口获取高清图片地址时，添加了 `onFetchImage` 参数，当没有次参数时，默认使用 `urlList` 展示，若有，当切换图片会先调用 `onFetchImage` 获取真实要预览的图片地址
+图片预览组件，从 [element-ui](https://element.eleme.cn/#/zh-CN/component/image) 的图片组件中剥离出来的单独的图片预览功能，参数和 element-ui 的图片预览组件一致，主要为解决当预览图片需要通过接口获取高清图片地址时，添加了 `onFetchImage` 参数，当没有此参数时，默认使用 `urlList` 展示，若有，当切换图片会先调用 `onFetchImage` 获取真实要预览的图片地址
+
+### 使用方式
+
+```
+// 安装
+npm i @breathlessway/element-image-preview -S
+
+// 引入组件
+import ImageViewer from "@breathlessway/element-image-preview";
+// 引入样式
+import "@breathlessway/element-image-preview/dist/element-image-preview.css";
+
+// 注册组件
+Vue.use(ImageViewer);
+```
 
 ### 基础用法
 
